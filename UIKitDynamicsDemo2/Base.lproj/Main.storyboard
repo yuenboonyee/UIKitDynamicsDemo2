@@ -17,8 +17,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo-icon-auspost-120x120" translatesAutoresizingMaskIntoConstraints="NO" id="fJz-98-Z7q">
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo-icon-auspost-120x120" translatesAutoresizingMaskIntoConstraints="NO" id="fJz-98-Z7q">
                                 <rect key="frame" x="270" y="0.0" width="60" height="60"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="IcL-Ok-tX6" appends="YES" id="BJM-bz-FIm"/>
+                                </connections>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EJg-TU-ayY" userLabel="shelf">
                                 <rect key="frame" x="16" y="478" width="568" height="12"/>
@@ -79,6 +83,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="IcL-Ok-tX6">
+                    <connections>
+                        <action selector="pushWithoutResetDemo:" destination="BYZ-38-t0r" id="O9r-Pv-XG8"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
         </scene>
     </scenes>
