@@ -1,6 +1,9 @@
 Overview
 ========
-This project demonstrates how to use UIKitDynamics to add physics behaviour to on-screen objects.
+This project demonstrates how to use UIKitDynamics to add physics behaviour to on-screen objects. The project demonstrates the following:
+- Gravity
+- Spring or snapping to a point
+- Pushing
 
 Method for falling objects:
 Add dynamic properties to UIViews. Instantiate UIDynamicItemBehavior object. Give dynamic behavior to an array of UIView objects:

@@ -79,7 +79,6 @@
  */
 -(IBAction)snapToPointDemo:(id)sender{
     [self resetViews];
-    //Method for falling objects:
     //Add dynamic properties to UIViews. Instantiate UIDynamicItemBehavior object. Give dynamic behavior to an array of UIView objects:
     UIDynamicItemBehavior *itemBehaviour = [[UIDynamicItemBehavior alloc] initWithItems:@[self.imageView]];
     //Set the properties of the UIDynamicItemBehavior object:
@@ -98,12 +97,11 @@
 }
 
 /*!
- @brief  Spring demonstration.
+ @brief Push demonstration.
  @param sender	The UIButton.
  */
 -(IBAction)pushDemo:(id)sender{
     [self resetViews];
-    //Method for falling objects:
     //Add dynamic properties to UIViews. Instantiate UIDynamicItemBehavior object. Give dynamic behavior to an array of UIView objects:
     UIDynamicItemBehavior *itemBehaviour = [[UIDynamicItemBehavior alloc] initWithItems:@[self.imageView]];
     //Set the properties of the UIDynamicItemBehavior object:
@@ -121,6 +119,21 @@
     [self.dynamicAnimator addBehavior:pushBehavior];
     [self.dynamicAnimator addBehavior:itemBehaviour];
     
+}
+
+/*!
+ @brief Push demonstration, without resetting the behaviours.
+ @param sender	The UIButton.
+ */
+-(IBAction)pushWithoutResetDemo:(id)sender{
+    //Add snap to point behaviour to UIViews.
+    UIPushBehavior *pushBehavior = [[UIPushBehavior alloc] initWithItems:@[self.imageView]
+                                                                    mode:UIPushBehaviorModeInstantaneous];
+    [pushBehavior setAngle:3.141/2 magnitude:3.5];
+    
+    
+    //Instantiate a UIDynamicAnimator object and add the behaviours:
+    [self.dynamicAnimator addBehavior:pushBehavior];
 }
 
 /*!
