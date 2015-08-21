@@ -76,6 +76,10 @@
                             <constraint firstAttribute="trailingMargin" secondItem="EJg-TU-ayY" secondAttribute="trailing" id="jhJ-nZ-n6p"/>
                             <constraint firstItem="fJz-98-Z7q" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="-20" id="pOB-i8-BBa"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="cKw-L8-5mX" appends="YES" id="FfX-3N-skk"/>
+                            <outletCollection property="gestureRecognizers" destination="DMi-By-umN" appends="YES" id="6eQ-ak-FSV"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="imageView" destination="fJz-98-Z7q" id="ZBM-Pt-D6g"/>
@@ -88,6 +92,16 @@
                         <action selector="pushWithoutResetDemo:" destination="BYZ-38-t0r" id="O9r-Pv-XG8"/>
                     </connections>
                 </tapGestureRecognizer>
+                <swipeGestureRecognizer direction="right" id="cKw-L8-5mX">
+                    <connections>
+                        <action selector="spinRight:" destination="BYZ-38-t0r" id="7tS-l1-RU0"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="left" id="DMi-By-umN">
+                    <connections>
+                        <action selector="spinLeft:" destination="BYZ-38-t0r" id="Gpz-sR-nrC"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
         </scene>
     </scenes>

@@ -11,12 +11,17 @@
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (nonatomic) CGRect originalImageFrame;
+@property (nonatomic) CGAffineTransform originalTransform;
 @property (weak, nonatomic) IBOutlet UIView *uiViewShelf;
 /*!
  @brief  This object must be retained. If it is a local variable and is auto-released, nothing will animate.
  */
 @property (strong, nonatomic) UIDynamicAnimator *dynamicAnimator;
 
+/*!
+ @brief  The behaviour of the image view.
+ */
+@property (strong, nonatomic) UIDynamicItemBehavior *itemBehaviour;
 @end
 
 @implementation ViewController
@@ -29,6 +34,7 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     self.originalImageFrame = self.imageView.frame;
+    self.originalTransform = self.imageView.transform;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -45,9 +51,9 @@
     [self resetViews];
     //Method for falling objects:
     //Add dynamic properties to UIViews. Instantiate UIDynamicItemBehavior object. Give dynamic behavior to an array of UIView objects:
-    UIDynamicItemBehavior *itemBehaviour = [[UIDynamicItemBehavior alloc] initWithItems:@[self.imageView]];
+    self.itemBehaviour = [[UIDynamicItemBehavior alloc] initWithItems:@[self.imageView]];
     //Set the properties of the UIDynamicItemBehavior object:
-    itemBehaviour.elasticity = 0.5; //Make the square somewhat bouncy.
+    self.itemBehaviour.elasticity = 0.5; //Make the square somewhat bouncy.
     
     //Add gravity behaviour to UIViews. Instantiate a UIGravityBehavior object. Make an array of UIView object subject to gravity:
     UIGravityBehavior *gravityBehavior = [[UIGravityBehavior alloc] initWithItems:@[self.imageView]];
@@ -69,7 +75,7 @@
     self.dynamicAnimator = [[UIDynamicAnimator alloc]initWithReferenceView:self.view];
     [self.dynamicAnimator addBehavior:gravityBehavior];
     [self.dynamicAnimator addBehavior:collisionBehavior];
-    [self.dynamicAnimator addBehavior:itemBehaviour];
+    [self.dynamicAnimator addBehavior:self.itemBehaviour];
 
 }
 
@@ -80,9 +86,9 @@
 -(IBAction)snapToPointDemo:(id)sender{
     [self resetViews];
     //Add dynamic properties to UIViews. Instantiate UIDynamicItemBehavior object. Give dynamic behavior to an array of UIView objects:
-    UIDynamicItemBehavior *itemBehaviour = [[UIDynamicItemBehavior alloc] initWithItems:@[self.imageView]];
+    self.itemBehaviour = [[UIDynamicItemBehavior alloc] initWithItems:@[self.imageView]];
     //Set the properties of the UIDynamicItemBehavior object:
-    itemBehaviour.allowsRotation = NO;  //Don't allow the image to rotate.
+    self.itemBehaviour.allowsRotation = NO;  //Don't allow the image to rotate.
     
     //Add snap to point behaviour to UIViews.
     UISnapBehavior *snapBehavior = [[UISnapBehavior alloc] initWithItem:self.imageView snapToPoint:CGPointMake(self.view.center.x, self.view.center.y)];
@@ -92,7 +98,7 @@
     //Instantiate a UIDynamicAnimator object and add the behaviours:
     self.dynamicAnimator = [[UIDynamicAnimator alloc]initWithReferenceView:self.view];
     [self.dynamicAnimator addBehavior:snapBehavior];
-    [self.dynamicAnimator addBehavior:itemBehaviour];
+    [self.dynamicAnimator addBehavior:self.itemBehaviour];
     
 }
 
@@ -103,10 +109,10 @@
 -(IBAction)pushDemo:(id)sender{
     [self resetViews];
     //Add dynamic properties to UIViews. Instantiate UIDynamicItemBehavior object. Give dynamic behavior to an array of UIView objects:
-    UIDynamicItemBehavior *itemBehaviour = [[UIDynamicItemBehavior alloc] initWithItems:@[self.imageView]];
+    self.itemBehaviour = [[UIDynamicItemBehavior alloc] initWithItems:@[self.imageView]];
     //Set the properties of the UIDynamicItemBehavior object:
-    itemBehaviour.allowsRotation = NO;  //Don't allow the image to rotate.
-    itemBehaviour.resistance = 2;
+    self.itemBehaviour.allowsRotation = NO;  //Don't allow the image to rotate.
+    self.itemBehaviour.resistance = 2;
     
     //Add snap to point behaviour to UIViews.
     UIPushBehavior *pushBehavior = [[UIPushBehavior alloc] initWithItems:@[self.imageView]
@@ -117,7 +123,7 @@
     //Instantiate a UIDynamicAnimator object and add the behaviours:
     self.dynamicAnimator = [[UIDynamicAnimator alloc]initWithReferenceView:self.view];
     [self.dynamicAnimator addBehavior:pushBehavior];
-    [self.dynamicAnimator addBehavior:itemBehaviour];
+    [self.dynamicAnimator addBehavior:self.itemBehaviour];
     
 }
 
@@ -137,10 +143,28 @@
 }
 
 /*!
+ @brief Push demonstration, without resetting the behaviours.
+ @param sender	The UIButton.
+ */
+-(IBAction)spinRight:(id)sender{
+    //Add snap to point behaviour to UIViews.
+    self.itemBehaviour.allowsRotation = YES;
+    [self.itemBehaviour addAngularVelocity:10 forItem:self.imageView];
+}
+
+-(IBAction)spinLeft:(id)sender{
+    //Add snap to point behaviour to UIViews.
+    self.itemBehaviour.allowsRotation = YES;
+    [self.itemBehaviour addAngularVelocity:-10 forItem:self.imageView];
+}
+
+/*!
  @brief  Resets all animated views to the original location. Removes all dynamic behaviors.
  */
 -(void)resetViews{
     [self.dynamicAnimator removeAllBehaviors];
+    self.itemBehaviour = nil;
     self.imageView.frame = self.originalImageFrame;
+    self.imageView.transform = self.originalTransform;
 }
 @end
