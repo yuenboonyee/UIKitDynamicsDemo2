@@ -98,6 +98,32 @@
 }
 
 /*!
+ @brief  Spring demonstration.
+ @param sender	The UIButton.
+ */
+-(IBAction)pushDemo:(id)sender{
+    [self resetViews];
+    //Method for falling objects:
+    //Add dynamic properties to UIViews. Instantiate UIDynamicItemBehavior object. Give dynamic behavior to an array of UIView objects:
+    UIDynamicItemBehavior *itemBehaviour = [[UIDynamicItemBehavior alloc] initWithItems:@[self.imageView]];
+    //Set the properties of the UIDynamicItemBehavior object:
+    itemBehaviour.allowsRotation = NO;  //Don't allow the image to rotate.
+    itemBehaviour.resistance = 2;
+    
+    //Add snap to point behaviour to UIViews.
+    UIPushBehavior *pushBehavior = [[UIPushBehavior alloc] initWithItems:@[self.imageView]
+                                                                    mode:UIPushBehaviorModeInstantaneous];
+    [pushBehavior setAngle:3.141/2 magnitude:3.5];
+    
+    
+    //Instantiate a UIDynamicAnimator object and add the behaviours:
+    self.dynamicAnimator = [[UIDynamicAnimator alloc]initWithReferenceView:self.view];
+    [self.dynamicAnimator addBehavior:pushBehavior];
+    [self.dynamicAnimator addBehavior:itemBehaviour];
+    
+}
+
+/*!
  @brief  Resets all animated views to the original location. Removes all dynamic behaviors.
  */
 -(void)resetViews{
