@@ -27,6 +27,24 @@
                                     <constraint firstAttribute="height" constant="12" id="ZqC-m4-swe"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PGG-HY-C6b">
+                                <rect key="frame" x="16" y="28" width="49" height="30"/>
+                                <state key="normal" title="Gravity">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="gravityDemo:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6rN-o9-MaP"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Gv-nh-i61">
+                                <rect key="frame" x="16" y="66" width="45" height="30"/>
+                                <state key="normal" title="Spring">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="snapToPointDemo:" destination="BYZ-38-t0r" eventType="touchUpInside" id="te3-ZJ-5gY"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
