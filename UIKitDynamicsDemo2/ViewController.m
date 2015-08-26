@@ -114,7 +114,7 @@
     self.itemBehaviour.allowsRotation = NO;  //Don't allow the image to rotate.
     self.itemBehaviour.resistance = 2;
     
-    //Add snap to point behaviour to UIViews.
+    //Add push behaviour to UIViews.
     UIPushBehavior *pushBehavior = [[UIPushBehavior alloc] initWithItems:@[self.imageView]
                                                                     mode:UIPushBehaviorModeInstantaneous];
     [pushBehavior setAngle:3.141/2 magnitude:3.5];
@@ -132,7 +132,7 @@
  @param sender	The UIButton.
  */
 -(IBAction)pushWithoutResetDemo:(id)sender{
-    //Add snap to point behaviour to UIViews.
+    //Add behaviour to UIViews.
     UIPushBehavior *pushBehavior = [[UIPushBehavior alloc] initWithItems:@[self.imageView]
                                                                     mode:UIPushBehaviorModeInstantaneous];
     [pushBehavior setAngle:3.141/2 magnitude:3.5];
@@ -147,13 +147,13 @@
  @param sender	The UIButton.
  */
 -(IBAction)spinRight:(id)sender{
-    //Add snap to point behaviour to UIViews.
+    //Add behaviour to UIViews.
     self.itemBehaviour.allowsRotation = YES;
     [self.itemBehaviour addAngularVelocity:10 forItem:self.imageView];
 }
 
 -(IBAction)spinLeft:(id)sender{
-    //Add snap to point behaviour to UIViews.
+    //Add behaviour to UIViews.
     self.itemBehaviour.allowsRotation = YES;
     [self.itemBehaviour addAngularVelocity:-10 forItem:self.imageView];
 }
